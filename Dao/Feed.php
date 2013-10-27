@@ -17,24 +17,33 @@ class Feed{
 	}
 	
 	public function save($feed){
-		$this->database->query("INSERT INTO feed (name,url) VALUES ('" . $feed->getName() . "','" . $feed->getUrl() ."')");
+
+		$titulo = trim(preg_replace('/\s+/', ' ', $feed->getTitle()));
+		
+
+		$this->getDatabase()->query("INSERT INTO feed (title,url,registered) VALUES ('" . $titulo . "','" . $feed->getUrl() ."', now())");
+
+		return $this->getDatabase()->getInsertId();
 	}
 	
 	public function get()
 	{
 		$feedList = array();
 		
-		$queryResult = $this->getDatabase()->query("SELECT url FROM feed");
+		$queryResult = $this->getDatabase()->query("SELECT id,url FROM feed GROUP BY url");
 		
 
 		for($i =0; $i < $queryResult->num_rows; $i++){
 
 			$row = mysqli_fetch_array($queryResult);
 				
-			$feedList[$i] = new \model\Feed();
-			$feedList[$i]->setUrl($row["url"]);
+			$feed = new \Model\Feed();
+			$feed->setId($row["id"]);
+			$feed->setUrl($row["url"]);
+			array_push($feedList,$feed);
+			
 		}
-		
+
 		return $feedList;
 	}
 }

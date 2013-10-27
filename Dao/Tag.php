@@ -16,14 +16,6 @@ class Tag{
 		return $this->database;
 	}
 	
-	public function save($tagName){
-		$queryString = "INSERT INTO tag(name) VALUES ('".$tag->getName() . "'";
-		
-		$this->getDatabase()->query($queryString);
-		
-		return $this->getDatabase()->insert_id;
-	}
-	
 	public function get()
 	{
 		$tagList = array();
@@ -43,23 +35,22 @@ class Tag{
 		return $tagList;
 	}
 	
-	public function getTag($tagName){
-		$tag = new \Model\Tag();
-					
-		$queryResult = $this->getDatabase()->query("SELECT id, name FROM tag");
+	public function getTagId($tagName){
+	
+		$queryResult = $this->getDatabase()->query("SELECT id FROM tag WHERE name = '" . $tagName  . "'");
 		
 		if(mysqli_num_rows($queryResult) == 0){
-			$tagId = $this->save($tagName);
+			$queryString = "INSERT INTO tag(name) VALUES ('". $tagName . "')";
+			$this->getDatabase()->query($queryString);
+		
+			$tagId = $this->getDatabase()->getInsertId();
 		}else{
 			$row = mysqli_fetch_array($queryResult);
 			
 			$tagId = $row["id"];
 		}
-		
-		$tag->setId($tagId);
-		$tag->setName($tagName);
-		
-		return $tag;
+
+		return $tagId;
 	}
 }
 

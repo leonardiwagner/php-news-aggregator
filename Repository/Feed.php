@@ -4,14 +4,14 @@ namespace Repository;
 
 include_once "../Dao/Feed.php";
 
-class Tag{
+class Feed{
 	
 	private $feedDao = null;
 	
 	function __construct(){
 		//prevent multiple instances
 		if($this->feedDao == null){
-			$this->feedDao = new \Feed\Tag();
+			$this->feedDao = new \Dao\Feed();
 		}
 		
 		return $this->feedDao;

@@ -1,17 +1,21 @@
 <?php
 
-error_reporting(E_ERROR | E_PARSE);
+//error_reporting(E_ERROR | E_PARSE);
 
-include "..\Bll\Feed.php";
-include "..\Repository\Tag.php";
+include_once "..\Bll\Feed.php";
+include_once "..\Repository\Feed.php";
+include_once "..\Repository\FeedTag.php";
+include_once "..\Repository\Tag.php";
 
 $feed = null;
 $feedBll = new \Bll\Feed();
 
+$feedRepository = new \Repository\Feed();
+$feedTagRepository = new \Repository\FeedTag();
 $tagRepository = new \Repository\Tag();
 
 $data = null;
-
+$feed = null;
 
 
 
@@ -20,7 +24,7 @@ try{
 	$data = file_get_contents("php://input");
 	$data = json_decode($data);	
 	
-	$feed = $feedBll->readFeed($data->feed);
+	$feed = $feedBll->readFeed2($data->feed);
 }catch(Exception $e){
 	$jsonResponse = "{ \"response\": false, \"text\": \"O endereço que você adicionou não é um feed válido\"}";	
 	echo $jsonResponse;
@@ -35,12 +39,21 @@ if(strlen($data->feed) <= 3)
 	exit;
 }
 
+
+//Check if feed have content
 if(sizeof($feed->getFeedItemList()) <= 0){
-	$jsonResponse = "{ \"response\": false, \"text\": \"O feed que você adicionou não tem noticias :()\"}";	
-	echo $jsonResponse;
-	exit;
+	//check for rss1
+	$feed = $feedBll->readFeed1($data->feed);
 	
+	if(sizeof($feed->getFeedItemList()) <= 0){
+		$jsonResponse = "{ \"response\": false, \"text\": \"O feed que você adicionou não tem noticias :()\"}";	
+		echo $jsonResponse;
+		exit;
+	}
+	
+
 }
+
 
 //Check if feed have at least one tag
 if($data->tag == null || sizeof($data->tag) <= 0){
@@ -49,17 +62,24 @@ if($data->tag == null || sizeof($data->tag) <= 0){
 	exit;
 }
 
-//Check if feed have content
-if(sizeof($feed->getFeedItemList()) <= 0){
-	$jsonResponse = "{ \"response\": false, \"text\": \"O feed que você adicionou não tem noticias :()\"}";	
+
+
+//Save feed
+$feedId = $feedRepository->save($feed);
+if(!($feedId > 0))
+{
+	$jsonResponse = "{ \"response\": false, \"text\": \"Não deu para salvar o feed no banco de dados\"}";	
 	echo $jsonResponse;
 	exit;
 }
 
-//Save feed
-
 //Save tags
-
+for($i = 0; $i < sizeof($data->tag); $i++){
+	
+	$tagId = $tagRepository->getTagId($data->tag[$i]);
+	$feedTagRepository->save($feedId, $tagId);
+	
+}
 
 
 $jsonResponse = "{ \"response\": true, \"text\": \"ok\"}";	

@@ -40,10 +40,7 @@
 					  </li>
 				</ul>
 				<div id="pnlSearch" class="">
-					reretre
-					tr
-					t
-					ret
+					teste
 				</div>
 				<div id="pnlAddFeed" style="display:none;" class="">
 	 				<div class="form-group">
@@ -78,9 +75,9 @@
 			<div class="panel-heading">{{feedBox.title}}</div>
 			<div class="panel-body">{{feedBox.description}}</div>
 			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="feedItem in feedItemList">
-					<h3>{{feedItem.title}}</h3>
-					<p>{{feedItem.description}}</p>
+				<li class="list-group-item" ng-repeat="feedItem in feedBox.feedItemList">
+					<p>{{feedItem.title}}</p>
+					
 					<em>{{feedItem.publicationDate}}</em>
 				</li>
 			</ul>

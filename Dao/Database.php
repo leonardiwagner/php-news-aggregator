@@ -21,6 +21,11 @@ class Database{
 		return $this->connection->query($queryString);
 	}
 	
+	public function getInsertId()
+	{
+		return $this->connection->insert_id;
+	}
+	
 }// end class
 
 ?>

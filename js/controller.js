@@ -10,13 +10,9 @@ app.controller('AddFeedCtrl', function AddFeedCtrl($scope, $http) {
 		$("#alert-add").show();
 		$("#alert-add-success").hide();
 		$("#alert-add-danger").hide();
-		
-		
-		
-		
-		
-		
+
 		alert($("#fldAddTag").tagsinput('items'));
+		
 		
 		$http.post('/Service/Feed.php', { feed: $("#fldAddFeed").val(), tag: $("#fldAddTag").tagsinput('items') })
 				.success(function(data, status, headers, config) {
@@ -46,6 +42,22 @@ app.controller('AddFeedCtrl', function AddFeedCtrl($scope, $http) {
 	}
 	
 );
+
+
+
+
+app.controller('FeedBoxCtrl', function FeedBoxCtrl($scope, $http) {
+ 	$scope.feedBoxList = null;
+ 	
+ 	$http.post('/Service/FeedBoxGet.php', { cache: false })
+	.success(function(data, status, headers, config) {
+		$scope.feedBoxList = data;
+	})
+	.error(function(data) {
+		
+	});
+			
+});
 
 
 

@@ -12,13 +12,25 @@ $feedItemRepository = new \Repository\FeedItem();
 
 for($i = 0; $i < sizeof($feedList); $i++){
 	
-	$feedList = $feedBll->readFeed($feedList[$i]->getUrl());
-	
-	$feedItemList = $feedList->getFeedItemList();
-	
-	foreach($feedList->getFeedItemList() as $feedItem)
-	{
-		$feedItemRepository->saveFeedItem($feedItem);
+	try{
+		$feed= $feedBll->readFeed2($feedList[$i]->getUrl());
+		
+		if(sizeof($feed->getFeedItemList()) <= 0){
+			//check for rss1
+			$feed = $feedBll->readFeed1($data->feed);
+			echo "rui";
+
+		}
+		
+		$feedItemList = $feed->getFeedItemList();
+		
+		foreach($feed->getFeedItemList() as $feedItem)
+		{
+			$feedItem->setFeedId($feedList[$i]->getId());
+			$feedItemRepository->saveFeedItem($feedItem);
+		}
+	}catch(Exception $e){
+		
 	}
 
 }
