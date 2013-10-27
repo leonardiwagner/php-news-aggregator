@@ -1,0 +1,13 @@
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3" ng-repeat="feedBox in feedBoxList">
+	<div class="panel panel-primary ">
+		<div class="panel-heading">{{feedBox.title}}</div>
+		<div class="panel-body">{{feedBox.description}}</div>
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="feedItem in feedItemList">
+				<h3>{{feedItem.title}}</h3>
+				<p>{{feedItem.description}}</p>
+				<em>{{feedItem.publicationDate}}</em>
+			</li>
+		</ul>
+	</div>
+</div>
