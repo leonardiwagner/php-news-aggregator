@@ -21,6 +21,10 @@ class Tag{
 		return $this->tagDao->get();
 	}
 	
+	public function getTop($skip = 0, $count = 50){
+		return $this->tagDao->getTop($skip,$count);
+	}
+	
 	public function getTagId($tagName){
 		return $this->tagDao->getTagId($tagName);
 	}

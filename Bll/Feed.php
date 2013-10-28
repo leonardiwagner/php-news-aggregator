@@ -2,8 +2,8 @@
 
 namespace Bll;
 
-include_once "../model/Feed.php";
-include_once "../model/FeedItem.php";
+include_once "../Model/Feed.php";
+include_once "../Model/FeedItem.php";
 
 class Feed{
 	

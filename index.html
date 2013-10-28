@@ -9,11 +9,33 @@
     <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
     <link href="bootstrap/css/bootstrap-tagsinput.css" rel="stylesheet" media="screen">
     
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="js/controller.js"></script>
    	
    	<style>
+   		body{
+   			
+   			font-family: 'Droid Serif', serif;
+   			
+   			background-color:#FAF8E7;
+   		}
+   		
+   		h1,h2,h3{
+   			font-family: 'Droid Serif', serif;
+   		}
+   		
+   		ul{
+   			list-style: none;
+   			padding:0;
+   		}
+   		
+   		ul li{
+   			margin-bottom:10px;
+   		}
+   		
    		.bootstrap-tagsinput {
    			width:100%;
    		}
@@ -21,6 +43,19 @@
 	
   </head>
   <body>
+  	
+  	<header>
+  		<nav class="navbar navbar-default "  role="navigation">
+  			<div class="navbar-header">
+  				
+  				<a class="navbar-brand " href="#"><strong>TEKPID</strong></a>
+			</div>
+			 <ul class="nav navbar-nav navbar-right">
+			 	<button type="button" class="btn btn-default navbar-btn">Sign in</button>
+			 	<button type="button" class="btn btn-default navbar-btn">Sign in</button>
+		 	</ul>
+  		</nav>
+  	</header>
     
     
     
@@ -29,7 +64,7 @@
     
     
     
- 		<div class="row" ng-controller="AddFeedCtrl" >
+ 		<div class="row" ng-controller="AddFeedCtrl"  >
  			<div class="col-md-8 col-md-offset-2" >
  				<ul class="nav nav-tabs">
 					<li id="btnOpenSearch" class="active">
@@ -39,29 +74,32 @@
 					    <a href="javascript:openAddFeed();">Add Feed</a>
 					  </li>
 				</ul>
-				<div id="pnlSearch" class="">
-					teste
+				<div id="pnlSearch" class="" ng-controller="TagCloudCtrl">
+					
+							<a ng-repeat="tag in tagList" href="#" style="font-size:{{tag.value}}px;float:left;margin:5px;">{{tag.name}}</a>
+					
 				</div>
 				<div id="pnlAddFeed" style="display:none;" class="">
 	 				<div class="form-group">
-	 					<label for="fldAddFeed">Feed Url</label>
-				    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
-			   		<div>
-			   			
-			   		<div class="form-group" >
-				    <label>Feed tags/categories</label>
-							<input type="text" id="fldAddTag" class="form-control" title="Aperte Enter para entrar sua tag"  data-placement="top"  />
-				     		<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary " data-loading-text="Adding..." >Add Feed</button>
-				    </div>
-				    <div class="form-group" >
-					    <div id="alert-add" class="alert" style="display:none;">Rapidão, estamos adicionando seu feed... <img src="img/ajax-loader/default.gif" /></div>
-					    <div id="alert-add-danger" class="alert alert-danger" style="display:none;">>O feed que você</div>
-					    <div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
-				    </div>
-			    </div>
-			</div>
- 		</div>
-	    
+			 					<label for="fldAddFeed">Feed Url</label>
+						    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
+					   	
+					   			
+					   		<div class="form-group" >
+						    <label>Feed tags/categories</label>
+									<input type="text" id="fldAddTag" class="form-control" title="Aperte Enter para entrar sua tag"  data-placement="top"  />
+						     		<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary " data-loading-text="Adding..." >Add Feed</button>
+						    </div>
+						    <div class="form-group" >
+							    <div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
+							    <div id="alert-add-danger" class="alert alert-danger" style="display:none;">>O feed que você</div>
+							    <div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
+						    </div>
+					    </div>
+					</div>
+		 		</div>
+	 		</div>
+			    
 	    
 	    
 	    
@@ -70,17 +108,18 @@
 	
 <div class="row" ng-controller="FeedBoxCtrl">
 	
-	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3" ng-repeat="feedBox in feedBoxList">
-	<div class="panel panel-primary ">
-			<div class="panel-heading">{{feedBox.title}}</div>
-			<div class="panel-body">{{feedBox.description}}</div>
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="feedItem in feedBox.feedItemList">
-					<p>{{feedItem.title}}</p>
-					
-					<em>{{feedItem.publicationDate}}</em>
-				</li>
-			</ul>
+	<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" ng-repeat="feedBox in feedBoxList">
+		<div >
+				<strong >{{feedBox.title}}</strong>
+				<div >{{feedBox.description}}</div>
+				<ul >
+					<li c ng-repeat="feedItem in feedBox.feedItemList">
+						<strong><a href="{{feedItem.link}}" target="_blank">{{feedItem.title}}</a></strong>
+						<p><a href="{{feedItem.link}}" target="_blank">{{feedItem.description}}</a></p>
+						
+						<em>{{feedItem.publicationDate}}</em>
+					</li>
+				</ul>
 		</div>
 	</div>
 	
@@ -95,16 +134,17 @@
     
      <script>
      	$('#fldAddTag').tagsinput({
-     	  maxTags:5,
+     	  maxTags:10,
+     	  confirmKeys: [13, 44,32],
 		  typeahead: {
 		    source: function(query) {
-		      return $.getJSON('/Service/Tag.php');
+		      return $.getJSON('/Service/TagAutoComplete.php');
 		    }
 		    
 		  }
 		});
 		
-		$('#fldAddTag').tagsinput('input').tooltip({'trigger':'focus', 'title': 'Type a tag and press Enter'});
+		$('#fldAddTag').tagsinput('input').tooltip({'trigger':'focus', 'title': 'Type and press ENTER or SPACE '});
 		
 		//var $elt = ;
 		

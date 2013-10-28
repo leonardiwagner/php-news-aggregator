@@ -1,6 +1,6 @@
 <?php
 
-//error_reporting(E_ERROR | E_PARSE);
+error_reporting(E_ERROR | E_PARSE);
 
 include_once "..\Bll\Feed.php";
 include_once "..\Repository\Feed.php";
@@ -26,7 +26,7 @@ try{
 	
 	$feed = $feedBll->readFeed2($data->feed);
 }catch(Exception $e){
-	$jsonResponse = "{ \"response\": false, \"text\": \"O endereço que você adicionou não é um feed válido\"}";	
+	$jsonResponse = "{ \"response\": false, \"text\": \"Hey, the typed Feed Url is not valid!\"}";	
 	echo $jsonResponse;
 	exit;
 }
@@ -34,7 +34,7 @@ try{
 //Check if user typed the feed url
 if(strlen($data->feed) <= 3)
 {
-	$jsonResponse = "{ \"response\": false, \"text\": \"Você deve inserir o endereço do feed\"}";	
+	$jsonResponse = "{ \"response\": false, \"text\": \"You need to type Feed Url\"}";	
 	echo $jsonResponse;
 	exit;
 }
@@ -46,7 +46,7 @@ if(sizeof($feed->getFeedItemList()) <= 0){
 	$feed = $feedBll->readFeed1($data->feed);
 	
 	if(sizeof($feed->getFeedItemList()) <= 0){
-		$jsonResponse = "{ \"response\": false, \"text\": \"O feed que você adicionou não tem noticias :()\"}";	
+		$jsonResponse = "{ \"response\": false, \"text\": \"The given Feed Url doesn't have any news :()\"}";	
 		echo $jsonResponse;
 		exit;
 	}
@@ -57,7 +57,7 @@ if(sizeof($feed->getFeedItemList()) <= 0){
 
 //Check if feed have at least one tag
 if($data->tag == null || sizeof($data->tag) <= 0){
-	$jsonResponse = "{ \"response\": false, \"text\": \"Você deve inserir pelo menos uma tag para adicionar o feed\"}";	
+	$jsonResponse = "{ \"response\": false, \"text\": \"You have to type at least one category to add feed\"}";	
 	echo $jsonResponse;
 	exit;
 }
@@ -68,10 +68,11 @@ if($data->tag == null || sizeof($data->tag) <= 0){
 $feedId = $feedRepository->save($feed);
 if(!($feedId > 0))
 {
-	$jsonResponse = "{ \"response\": false, \"text\": \"Não deu para salvar o feed no banco de dados\"}";	
+	$jsonResponse = "{ \"response\": false, \"text\": \"Oh, our database is so stupid! Please report this bug.\"}";	
 	echo $jsonResponse;
 	exit;
 }
+
 
 //Save tags
 for($i = 0; $i < sizeof($data->tag); $i++){
@@ -82,7 +83,7 @@ for($i = 0; $i < sizeof($data->tag); $i++){
 }
 
 
-$jsonResponse = "{ \"response\": true, \"text\": \"ok\"}";	
+$jsonResponse = "{ \"response\": true, \"text\": \"Awesome! We have a new feed, thanks very much!\"}";	
 echo $jsonResponse;
 exit;
 

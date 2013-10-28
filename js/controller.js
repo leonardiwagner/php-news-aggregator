@@ -11,8 +11,6 @@ app.controller('AddFeedCtrl', function AddFeedCtrl($scope, $http) {
 		$("#alert-add-success").hide();
 		$("#alert-add-danger").hide();
 
-		alert($("#fldAddTag").tagsinput('items'));
-		
 		
 		$http.post('/Service/Feed.php', { feed: $("#fldAddFeed").val(), tag: $("#fldAddTag").tagsinput('items') })
 				.success(function(data, status, headers, config) {
@@ -27,10 +25,14 @@ app.controller('AddFeedCtrl', function AddFeedCtrl($scope, $http) {
 					
 					$("#alert-add").hide();
 					$("#btnAddFeed").button('reset');
+					
+					$("#fldAddFeed").val('');
+					$("#fldAddTag").tagsinput('removeAll');
+					
 			
 				})
 				.error(function(data) {
-					$("#alert-add-danger").html("Eita, algo de estranho aconteceu, tente de novo.");
+					$("#alert-add-danger").html("Woa, something wrong happened, please report this bug.");
 				    $("#alert-add-danger").show();
 				    
 				    $("#alert-add").hide();
@@ -44,6 +46,27 @@ app.controller('AddFeedCtrl', function AddFeedCtrl($scope, $http) {
 );
 
 
+
+app.controller('TagCloudCtrl', function TagCloudCtrl($scope, $http) {
+ 
+	$scope.tagList = null;
+	
+		$("#alert-add-success").hide();
+
+		$http.post('/Service/TagCloud.php',  { cache: false } )
+		.success(function(data, status, headers, config) {
+		   
+			$scope.tagList = data;
+	
+		})
+		.error(function(data) {
+
+		});
+
+		
+	
+	
+});
 
 
 app.controller('FeedBoxCtrl', function FeedBoxCtrl($scope, $http) {

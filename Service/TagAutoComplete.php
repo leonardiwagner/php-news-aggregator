@@ -3,7 +3,7 @@
 include_once "../Repository/Tag.php";
 
 $tagRepository = new \Repository\Tag();
-$tagList = $tagRepository->get();
+$tagList = $tagRepository->getTop(0,500);
 
 $jsonReturn = "[";
 

@@ -35,6 +35,32 @@ class Tag{
 		return $tagList;
 	}
 	
+	public function getTop($skip = 0, $count = 50){
+		$tagList = array();
+		
+		$queryString = "select tag.id, tag.name, count(*) as value from feedtag ";
+		$queryString .= " INNER JOIN tag ON tag.id = feedtag.tagid ";
+		$queryString .= " group by tagid,tag.name ";
+		$queryString .= " order by count(*) DESC ";
+		$queryString .= " limit $skip,$count ";
+		
+		$queryResult = $this->getDatabase()->query($queryString);
+		
+		for($i =0; $i < $queryResult->num_rows; $i++){
+
+			$row = mysqli_fetch_array($queryResult);
+				
+			$tag = new \Model\Tag();
+			$tag->setId($row["id"]);
+			$tag->setName($row["name"]);
+			$tag->setValue($row["value"]);
+			array_push($tagList,$tag);
+			
+		}
+
+		return $tagList;
+	}
+	
 	public function getTagId($tagName){
 	
 		$queryResult = $this->getDatabase()->query("SELECT id FROM tag WHERE name = '" . $tagName  . "'");

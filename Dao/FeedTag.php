@@ -15,6 +15,8 @@ class FeedTag{
 		return $this->database;
 	}
 	
+	
+	
 	public function save($feedId, $tagId){
  		$this->getDatabase()->query("INSERT INTO feedtag (feedid,tagid) VALUES (" . $feedId . "," . $tagId .")");
 	}
