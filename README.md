@@ -5,7 +5,7 @@ feed reader
 
 features
 =========
--PHP
--MySQL
--Bootstrap
--Angular.js
+1. PHP
+2. MySQL
+3. Bootstrap
+4. Angular.js
