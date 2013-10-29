@@ -20,6 +20,7 @@ class FeedItem{
 	public function getLink() { return $this->link; }
 	public function getDescription() { return $this->description; }
 	public function getPublicationDate() { return $this->publicationDate; }
-}
+	
+}// end class
 
 ?>

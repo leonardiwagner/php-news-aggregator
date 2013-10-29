@@ -11,11 +11,10 @@ class FeedBox{
 	public function setTitle($value){ $this->title = $value; }
 	public function setDescription($value){ $this->description = $value; }
 	
-
 	public function getId() { return $this->id; }
 	public function getTitle() { return $this->title; }
 	public function getDescription() { return $this->description; }
 	
-}
+}// end class
 
 ?>

@@ -21,6 +21,6 @@ class FeedBox{
 		return $this->feedBoxDao->get();
 	}
 	
-}
+}// end class
 
 ?>

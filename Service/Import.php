@@ -18,8 +18,6 @@ for($i = 0; $i < sizeof($feedList); $i++){
 		if(sizeof($feed->getFeedItemList()) <= 0){
 			//check for rss1
 			$feed = $feedBll->readFeed1($data->feed);
-			echo "rui";
-
 		}
 		
 		$feedItemList = $feed->getFeedItemList();
@@ -34,7 +32,5 @@ for($i = 0; $i < sizeof($feedList); $i++){
 	}
 
 }
-
-
 
 ?>

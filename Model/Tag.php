@@ -14,7 +14,8 @@ class Tag{
 	public function getId() { return $this->id; }
 	public function getName() { return $this->name; } 
 	public function getValue() { return $this->value; } 
-}
+	
+}// end class
 
 
 ?>

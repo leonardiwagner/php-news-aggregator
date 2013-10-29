@@ -28,6 +28,7 @@ class Tag{
 	public function getTagId($tagName){
 		return $this->tagDao->getTagId($tagName);
 	}
-}
+	
+}// end class
 
 ?>

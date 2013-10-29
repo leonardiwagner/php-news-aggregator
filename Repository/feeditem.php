@@ -25,7 +25,7 @@ class FeedItem{
 		return $this->feedItemDao->get($feedBoxId, $skip, $count);
 	}
 	
-}
+}// end class
 
 
 ?>

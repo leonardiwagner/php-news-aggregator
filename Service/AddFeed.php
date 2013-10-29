@@ -17,8 +17,6 @@ $tagRepository = new \Repository\Tag();
 $data = null;
 $feed = null;
 
-
-
 //Check if rss have valid content
 try{
 	$data = file_get_contents("php://input");
@@ -39,7 +37,6 @@ if(strlen($data->feed) <= 3)
 	exit;
 }
 
-
 //Check if feed have content
 if(sizeof($feed->getFeedItemList()) <= 0){
 	//check for rss1
@@ -50,19 +47,14 @@ if(sizeof($feed->getFeedItemList()) <= 0){
 		echo $jsonResponse;
 		exit;
 	}
-	
-
 }
 
-
 //Check if feed have at least one tag
-if($data->tag == null || sizeof($data->tag) <= 0){
+if($data->tagId == null || $data->tagId == 0){
 	$jsonResponse = "{ \"response\": false, \"text\": \"You have to type at least one category to add feed\"}";	
 	echo $jsonResponse;
 	exit;
 }
-
-
 
 //Save feed
 $feedId = $feedRepository->save($feed);
@@ -73,21 +65,12 @@ if(!($feedId > 0))
 	exit;
 }
 
+//Save tag
+$feedTagRepository->save($feedId, $data->tagId);
 
-//Save tags
-for($i = 0; $i < sizeof($data->tag); $i++){
-	
-	$tagId = $tagRepository->getTagId($data->tag[$i]);
-	$feedTagRepository->save($feedId, $tagId);
-	
-}
-
-
-$jsonResponse = "{ \"response\": true, \"text\": \"Awesome! We have a new feed, thanks very much!\"}";	
+$jsonResponse = "{ \"response\": true, \"text\": \"Awesome! We have a new feed, thank you very much!\"}";	
 echo $jsonResponse;
 exit;
-
-//echo $feed->getTitle();
 
 
 

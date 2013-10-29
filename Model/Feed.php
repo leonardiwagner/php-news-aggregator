@@ -27,6 +27,6 @@ class Feed{
 	public function getFeedItemList() { return $this->feedItemList; }
 	public function getTagList() { return $this->feedItemList; }
 
-}
+}// end class
 
 ?>

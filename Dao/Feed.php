@@ -17,9 +17,7 @@ class Feed{
 	}
 	
 	public function save($feed){
-
 		$titulo = trim(preg_replace('/\s+/', ' ', $feed->getTitle()));
-		
 
 		$this->getDatabase()->query("INSERT INTO feed (title,url,registered) VALUES ('" . $titulo . "','" . $feed->getUrl() ."', now())");
 
@@ -32,7 +30,6 @@ class Feed{
 		
 		$queryResult = $this->getDatabase()->query("SELECT id,url FROM feed GROUP BY url");
 		
-
 		for($i =0; $i < $queryResult->num_rows; $i++){
 
 			$row = mysqli_fetch_array($queryResult);
@@ -46,6 +43,7 @@ class Feed{
 
 		return $feedList;
 	}
-}
+	
+}// end class
 
 ?>

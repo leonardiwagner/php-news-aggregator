@@ -4,9 +4,9 @@ namespace Dao;
 
 class Database{
 	private $ip = "localhost";
-	private $name = "pidfeed";
+	private $name = "feedrizer";
 	private $user = "root";
-	private $password = "1234";
+	private $password = "123";
 	
 	private $connection = null;
 	

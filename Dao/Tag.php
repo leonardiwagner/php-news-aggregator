@@ -62,7 +62,6 @@ class Tag{
 	}
 	
 	public function getTagId($tagName){
-	
 		$queryResult = $this->getDatabase()->query("SELECT id FROM tag WHERE name = '" . $tagName  . "'");
 		
 		if(mysqli_num_rows($queryResult) == 0){
@@ -78,6 +77,7 @@ class Tag{
 
 		return $tagId;
 	}
-}
+	
+}// end class
 
 ?>

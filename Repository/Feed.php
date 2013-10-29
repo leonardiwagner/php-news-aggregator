@@ -21,6 +21,6 @@ class Feed{
 		return $this->feedDao->save($feed);
 	}
 	
-}
+}// end class
 
 ?>

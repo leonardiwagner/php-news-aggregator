@@ -30,27 +30,7 @@ class Tag{
 		
 		return $rssFeed;
 	}
-	
-	
-}
 
-/*
- * 
- *  public static string ShowPreviewContent(string pContent, int pPreviewChar)
-        {
-            pContent = Regex.Replace(pContent, "<.*?>", string.Empty);
-            if (pContent.Length > pPreviewChar)
-            {
-                int endPosition = pContent.IndexOf(' ', pPreviewChar);
-                if (endPosition > 2)
-                    pContent = pContent.Substring(0, endPosition) + "...";
-                else
-                {
-                    pContent = pContent.Substring(0, pPreviewChar) + "...";
-                }
-            }
+}// end class
 
-            return pContent;
-        }
- */
 ?>

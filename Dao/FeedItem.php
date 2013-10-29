@@ -51,6 +51,7 @@ class FeedItem{
 		
 		$this->getDatabase()->query($queryString);
 	}
-}
+	
+}// end class
 
 ?>

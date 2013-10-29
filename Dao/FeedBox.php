@@ -36,6 +36,7 @@ class Feed{
 
 		return $feedBoxList;
 	}
-}
+	
+}// end class
 
 ?>

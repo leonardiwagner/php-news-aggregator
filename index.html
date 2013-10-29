@@ -1,189 +1,95 @@
 <!DOCTYPE html>
 <html ng-app="App">
-  <head>
-    <title>Pidfeed - Beta</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-    <link href="bootstrap/css/bootstrap-tagsinput.css" rel="stylesheet" media="screen">
-    
-    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
-    
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    <script src="js/controller.js"></script>
-   	
-   	<style>
-   		body{
-   			
-   			font-family: 'Droid Serif', serif;
-   			
-   			background-color:#FAF8E7;
-   		}
-   		
-   		h1,h2,h3{
-   			font-family: 'Droid Serif', serif;
-   		}
-   		
-   		ul{
-   			list-style: none;
-   			padding:0;
-   		}
-   		
-   		ul li{
-   			margin-bottom:10px;
-   		}
-   		
-   		.bootstrap-tagsinput {
-   			width:100%;
-   		}
-   	</style>
-	
-  </head>
-  <body>
-  	
-  	<header>
-  		<nav class="navbar navbar-default "  role="navigation">
-  			<div class="navbar-header">
-  				
-  				<a class="navbar-brand " href="#"><strong>TEKPID</strong></a>
-			</div>
-			 <ul class="nav navbar-nav navbar-right">
-			 	<button type="button" class="btn btn-default navbar-btn">Sign in</button>
-			 	<button type="button" class="btn btn-default navbar-btn">Sign in</button>
-		 	</ul>
-  		</nav>
-  	</header>
-    
-    
-    
-    
-    
-    
-    
-    
-
-		<div id="pnlAddFeed" style="display:block;" class="">
-			<div class="form-group">
-	 					<label for="fldAddFeed">Feed Url</label>
-				    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
-			   	
-			   			
-			   		<div class="form-group" >
-				    <label>Feed tags/categories</label>
-							<input type="text" id="fldAddTag" class="form-control" title="Aperte Enter para entrar sua tag"  data-placement="top"  />
-				     		<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary " data-loading-text="Adding..." >Add Feed</button>
-				    </div>
-				    <div class="form-group" >
-					    <div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
-					    <div id="alert-add-danger" class="alert alert-danger" style="display:none;">>O feed que você</div>
-					    <div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
-				    </div>
-			    </div>
-			</div>
-		
-<div class="row">
-	<div class="form-group">
-		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-			<label for="fldAddFeed">Feed Url</label>
-	    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
-		</div>
-		<div class="col-xs-8 col-sm-2 col-md-2 col-lg-2">
-			<label for="fldAddFeed">Feed Url</label>
-	    	<input type="text" id="fldAddFeed" placeholder="front-end" class="form-control input-lg" >
-	    	
-		</div>
-		<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
-			<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary  btn-block  btn-lg" data-loading-text="Adding..." >Add Feed</button>
-		</div>
-		
-	</div>
-</div>		
-<div class="row">
-	<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-		<div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
-		<div id="alert-add-danger" class="alert alert-danger" style="display:block;">>O feed que você</div>
-		<div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
-	</div>
-</div>	    
-	    
-	    
-	    
-	    
-	    
-	
-<div class="row" ng-controller="FeedBoxCtrl">
-	
-	<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" ng-repeat="feedBox in feedBoxList">
-		<div >
-				<strong >{{feedBox.title}}</strong>
-				<div >{{feedBox.description}}</div>
-				<ul >
-					<li c ng-repeat="feedItem in feedBox.feedItemList">
-						<strong><a href="{{feedItem.link}}" target="_blank">{{feedItem.title}}</a></strong>
-						<p><a href="{{feedItem.link}}" target="_blank">{{feedItem.description}}</a></p>
-						
-						<em>{{feedItem.publicationDate}}</em>
-					</li>
-				</ul>
-		</div>
-	</div>
-	
-</div>
-	
-	
-	
-
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/bootstrap-tagsinput.js"></script>
-    
-    
-     <script>
-     	$('#fldAddTag').tagsinput({
-     	  maxTags:10,
-     	  confirmKeys: [13, 44,32],
-		  typeahead: {
-		    source: function(query) {
-		      return $.getJSON('/Service/TagAutoComplete.php');
-		    }
-		    
-		  }
-		});
-		
-		$('#fldAddTag').tagsinput('input').tooltip({'trigger':'focus', 'title': 'Type and press ENTER or SPACE '});
-		
-		//var $elt = ;
-		
-		//$('.bootstrap-tagsinput input').focusin(function() {
-			
-			//console.log(1);
-		//});
-		function openSearch()
-		{
-			
-			$("#btnOpenAddFeed").removeClass("active");
-			$("#btnOpenSearch").addClass("active");
-			
-			$("#pnlAddFeed").hide();
-			$("#pnlSearch").show();
-		}
-		
-		function openAddFeed()
-		{
-			$("#btnOpenSearch").removeClass("active");
-			$("#btnOpenAddFeed").addClass("active");
-			
-			
-			$("#pnlSearch").hide();
-			$("#pnlAddFeed").show();
-			
-		}
-		
-		
-		
-	</script>
-	
-  </body>
+   <head>
+      <title>Pidfeed - Beta</title>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Bootstrap -->
+      <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+      <link href="bootstrap/css/bootstrap-tagsinput.css" rel="stylesheet" media="screen">
+      <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+      <script src="http://code.jquery.com/jquery.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+      <script src="js/controller.js"></script>
+      <style>
+         body{
+         font-family: 'Droid Serif', serif;
+         background-color:#FAF8E7;
+         }
+         h1,h2,h3{
+         font-family: 'Droid Serif', serif;
+         }
+         ul{
+         list-style: none;
+         padding:0;
+         }
+         ul li{
+         margin-bottom:10px;
+         }
+         .bootstrap-tagsinput {
+         width:100%;
+         }
+      </style>
+   </head>
+   <body>
+      <header ng-controller="HeaderCtrl">
+         <nav class="navbar navbar-default "  role="navigation">
+            <div class="navbar-header">
+               <button type="button" id="btnShowFeed" class="btn btn-default navbar-btn" ng-click="showAddFeed();">Feeds</button>
+               <button type="button" id="btnShowAddFeed" class="btn btn-primary navbar-btn" ng-click="showAddFeed();">Add a feed :)</button>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+               <button type="button" class="btn btn-default navbar-btn">About</button>
+            </ul>
+         </nav>
+      </header>
+      <div class="row" id="divAddFeed" style="display:none;">
+         <div class="form-group" ng-controller="AddFeedCtrl">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+               <h1>Add a new feed</h1>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" id="divAddFeedUrl">
+               <label for="fldAddFeedUrl" class="control-label">Feed Url</label>
+               <input type="text" id="fldAddFeedUrl" placeholder="www.example.com/feed.rss" class="form-control">
+            </div>
+            <div class="col-xs-8 col-sm-2 col-md-2 col-lg-2" id="divAddFeedCategory">
+               <label for="fldAddFeedCategory" class="control-label">Category</label>
+               <select id="fldAddFeedCategory"  class="form-control">
+                  <option value="0">-- Select --</option>
+                  <option value="1">News</option>
+                  <option value="1">Front-End</option>
+                  <option value="1">Back-End</option>
+                  <option value="1">Video</option>
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+               <button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary  btn-block" data-loading-text="Adding..." >Add Feed</button>
+            </div>
+         </div>
+         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2" id="divAddFeedUrl">
+            <div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
+            <div id="alert-add-danger" class="alert alert-danger" style="display:block;">>O feed que você</div>
+         </div>
+      </div>
+      <div class="row" id="divSuccess" style="display:none;">
+         <div id="alert-success" class="alert alert-success"></div>
+      </div>
+      <div class="row" ng-controller="FeedBoxCtrl">
+         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" ng-repeat="feedBox in feedBoxList">
+            <div >
+               <strong >{{feedBox.title}}</strong>
+               <div >{{feedBox.description}}</div>
+               <ul >
+                  <li c ng-repeat="feedItem in feedBox.feedItemList">
+                     <strong><a href="{{feedItem.link}}" target="_blank">{{feedItem.title}}</a></strong>
+                     <p><a href="{{feedItem.link}}" target="_blank">{{feedItem.description}}</a></p>
+                     <em>{{feedItem.publicationDate}}</em>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+   </body>
 </html>

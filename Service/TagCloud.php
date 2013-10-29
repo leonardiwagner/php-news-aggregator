@@ -25,12 +25,10 @@ for($i = 0; $i < sizeof($tagList); $i++){
 }
 
 
-
 $fontMin = 12;
 $fontMax = 16;
 
 $jsonReturn = "[";
-
 
 for($i = 0; $i < sizeof($tagList); $i++){
 	

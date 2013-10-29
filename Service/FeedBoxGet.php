@@ -15,8 +15,7 @@ for($i = 0; $i < sizeof($feedBoxList); $i++){
 	$jsonReturn .= "	\"id\": \"". $feedBoxList[$i]->getId() ."\",";
 	$jsonReturn .= "	\"title\": \"". $feedBoxList[$i]->getTitle() ."\",";
 	$jsonReturn .= "	\"description\": \"". $feedBoxList[$i]->getDescription() ."\",";
-	
-	
+
 	$jsonReturn .= "	\"feedItemList\": [ ";
 	
 	$feedItemList = $feedItemRepository->get($feedBoxList[$i]->getId());
@@ -35,7 +34,6 @@ for($i = 0; $i < sizeof($feedBoxList); $i++){
 		}
 	}
 	
-	
 	$jsonReturn .= "	] ";
 	
 	$jsonReturn .= "}";
@@ -49,7 +47,6 @@ for($i = 0; $i < sizeof($feedBoxList); $i++){
 $jsonReturn .= "]";
 
 echo $jsonReturn;
-
 
 function relativeTime($date, $postfix = ' ago', $fallback = 'F Y') 
 {
@@ -74,7 +71,5 @@ function relativeTime($date, $postfix = ' ago', $fallback = 'F Y')
 
     return date($fallback, strtotime($date));
 }
-
-
 
 ?>

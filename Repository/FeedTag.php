@@ -21,6 +21,6 @@ class FeedTag{
 		return $this->feedTagDao->save($feedId, $tagId);
 	}
 	
-}
+}// end class
 
 ?>
