@@ -64,42 +64,50 @@
     
     
     
- 		<div class="row" ng-controller="AddFeedCtrl"  >
- 			<div class="col-md-8 col-md-offset-2" >
- 				<ul class="nav nav-tabs">
-					<li id="btnOpenSearch" class="active">
-					    <a href="javascript:openSearch();">Search</a>
-					  </li>
-					  <li id="btnOpenAddFeed">
-					    <a href="javascript:openAddFeed();">Add Feed</a>
-					  </li>
-				</ul>
-				<div id="pnlSearch" class="" ng-controller="TagCloudCtrl">
-					
-							<a ng-repeat="tag in tagList" href="#" style="font-size:{{tag.value}}px;float:left;margin:5px;">{{tag.name}}</a>
-					
-				</div>
-				<div id="pnlAddFeed" style="display:none;" class="">
-	 				<div class="form-group">
-			 					<label for="fldAddFeed">Feed Url</label>
-						    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
-					   	
-					   			
-					   		<div class="form-group" >
-						    <label>Feed tags/categories</label>
-									<input type="text" id="fldAddTag" class="form-control" title="Aperte Enter para entrar sua tag"  data-placement="top"  />
-						     		<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary " data-loading-text="Adding..." >Add Feed</button>
-						    </div>
-						    <div class="form-group" >
-							    <div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
-							    <div id="alert-add-danger" class="alert alert-danger" style="display:none;">>O feed que você</div>
-							    <div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
-						    </div>
-					    </div>
-					</div>
-		 		</div>
-	 		</div>
-			    
+
+		<div id="pnlAddFeed" style="display:block;" class="">
+			<div class="form-group">
+	 					<label for="fldAddFeed">Feed Url</label>
+				    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
+			   	
+			   			
+			   		<div class="form-group" >
+				    <label>Feed tags/categories</label>
+							<input type="text" id="fldAddTag" class="form-control" title="Aperte Enter para entrar sua tag"  data-placement="top"  />
+				     		<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary " data-loading-text="Adding..." >Add Feed</button>
+				    </div>
+				    <div class="form-group" >
+					    <div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
+					    <div id="alert-add-danger" class="alert alert-danger" style="display:none;">>O feed que você</div>
+					    <div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
+				    </div>
+			    </div>
+			</div>
+		
+<div class="row">
+	<div class="form-group">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			<label for="fldAddFeed">Feed Url</label>
+	    	<input type="text" id="fldAddFeed" placeholder="www.example.com/feed.rss" class="form-control input-lg">
+		</div>
+		<div class="col-xs-8 col-sm-2 col-md-2 col-lg-2">
+			<label for="fldAddFeed">Feed Url</label>
+	    	<input type="text" id="fldAddFeed" placeholder="front-end" class="form-control input-lg" >
+	    	
+		</div>
+		<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+			<button id="btnAddFeed" href="" ng-click="addFeed()" class="btn btn-primary  btn-block  btn-lg" data-loading-text="Adding..." >Add Feed</button>
+		</div>
+		
+	</div>
+</div>		
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+		<div id="alert-add" class="alert" style="display:none;">We're working on this... <img src="img/ajax-loader/default.gif" /></div>
+		<div id="alert-add-danger" class="alert alert-danger" style="display:block;">>O feed que você</div>
+		<div id="alert-add-success" class="alert alert-success" style="display:none;">>Seu feed foi inserido com sucesso!</div>
+	</div>
+</div>	    
 	    
 	    
 	    
