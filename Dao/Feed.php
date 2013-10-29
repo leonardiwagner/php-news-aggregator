@@ -17,9 +17,9 @@ class Feed{
 	}
 	
 	public function save($feed){
-		$titulo = trim(preg_replace('/\s+/', ' ', $feed->getTitle()));
+		$title = trim(preg_replace('/\s+/', ' ', $feed->getTitle()));
 
-		$this->getDatabase()->query("INSERT INTO feed (title,url,registered) VALUES ('" . $titulo . "','" . $feed->getUrl() ."', now())");
+		$this->getDatabase()->query("INSERT INTO feed (title,url,registered) VALUES ('" . $title . "','" . $feed->getUrl() ."', now())");
 
 		return $this->getDatabase()->getInsertId();
 	}
