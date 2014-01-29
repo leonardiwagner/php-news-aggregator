@@ -1,7 +1,7 @@
-feedrizer
+techfeed
 =========
 
-feed reader
+PHP news aggregator (such as Bloglines, Feedly, Netvibes, etc...) , using RSS feed.
 
 features
 =========
