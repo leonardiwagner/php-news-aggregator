@@ -1,9 +1,9 @@
-techfeed
+php-news-aggregator
 =========
 
 PHP news aggregator (such as Bloglines, Feedly, Netvibes, etc...) , using RSS feed.
 
-features
+Features
 =========
 1. PHP
 2. MySQL
